@@ -10,6 +10,7 @@ const adminRoutes = require("./routes/admin/admin.routes");
 const cors = require("cors");
 
 //setting connection b/w node and database!
+
 mongoose
   .connect(process.env.MONGODBURI, {
     useNewUrlParser: true,

@@ -94,7 +94,7 @@ const adminSigninService = async (data) => {
     const { SECRET } = process.env;
     const token = await generateAuthToken({ _id, email, SECRET });
     admin.password = undefined;
-    const users =await Admin.find();
+    const users = await Admin.find();
     return {
       data: {
         admin,
@@ -109,8 +109,22 @@ const adminSigninService = async (data) => {
   }
 };
 
+const getDataService = async (id) => {
+  try {
+    const userData = await Admin.findOne({_id : id });
+    return {
+      data: userData,
+    };
+  } catch (err) {
+    console.log("err:", err);
+    const error = new HttpError("Something went wrong!", 500);
+    return { error };
+  }
+};
+
 module.exports = {
   validationFunction,
   adminSigninService,
   adminSignupService,
+  getDataService,
 };

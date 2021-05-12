@@ -20,7 +20,18 @@ const adminSigninController = async (req, res, next) => {
   return res.json(data);
 };
 
+//signin
+const getDataController = async (req, res, next) => {
+  const id = req.query.userId;
+  const response = await adminServices.getDataService(id);
+  const { error, data } = response;
+  if (error) {
+    return next(error);
+  }
+  return res.json(data);
+};
 module.exports = {
   adminSigninController,
-  adminSignupController
+  adminSignupController,
+  getDataController
 };
